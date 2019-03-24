@@ -1,4 +1,5 @@
 name: foundationdb
+version: git
 summary:  An open source, distributed, transactional key-value store.
 description: A multi-model NoSQL database.
   
