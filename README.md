@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/45159366/49500050-93fad300-f824-11e8-84d8-9d38a4a9d761.png">
+  <img src="https://user-images.githubusercontent.com/45159366/54876219-73ea2200-4dc9-11e9-95b2-a83b8753e078.png">
   <br />
   FoundationDB 
 </h1>
