@@ -22,7 +22,7 @@ parts:
     after: [desktop-glib-only]
     plugin: dump
     source:
-      - on amd64: https://www.foundationdb.org/downloads/$SNAPCRAFT_PROJECT_VERSION/FoundationDB_v$SNAPCRAFT_PROJECT_VERSION-stable_x11.64.tar.gz
+      - on amd64: https://www.foundationdb.org/downloads/$SNAPCRAFT_PROJECT_VERSION/FoundationDB_v$SNAPCRAFT_PROJECT_VERSION.tar.gz
       
     stage-packages:
       - libgl1-mesa-dri
@@ -46,4 +46,4 @@ parts:
       - libvorbisfile3
       - libwebp5
     organize:
-      'FoundationDB_v*-stable_x11.*': 'bin/FoundationDB'
+      'FoundationDB_v*': 'bin/FoundationDB'
