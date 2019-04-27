@@ -1,112 +1,49 @@
 name: foundationdb
-version: git
+base: core18
+version: 6.0.18
 summary:  An open source, distributed, transactional key-value store.
-description: A multi-model NoSQL database.
-  
-adopt-info: devmode # use 'strict' once you have the right plugs and slots
+description:| 
+A multi-model NoSQL database.
 
 grade: stable
-confinement: devmode
+confinement: classic
 
 architectures:
-  - build-on: i386
   - build-on: amd64
-  - build-on: armhf
-  - build-on: arm64
 
 apps:
   foundationdb:
-    command: bin/foundationdb
-    plugs:
-      - home
-      - network
-      - removable-media
+    command: bin/desktop-launch $SNAP/bin/FoundationDB
+    environment:
+      LD_LIBRARY_PATH: "$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio:$LD_LIBRARY_PATH"
 
 parts:
-    foundationdb:
-    plugin: 
-    source: https://github.com/apple/foundationdb.git
-    source-type: git
-    override-pull: |
-      git clone https://github.com/apple/foundationdb.git src/github.com/apple/foundationdb
-       cd src/github.com/apple/foundationdb
-      last_committed_tag="$(git describe --tags --abbrev=0)"
-      last_committed_tag_ver="$(echo ${last_committed_tag} | sed 's/v//')"
-      last_released_tag="$(snap info $SNAPCRAFT_PROJECT_NAME | awk '$1 == "beta:" { print $2 }')"
-      # If the latest tag from the upstream project has not been released to
-      # beta, build that tag instead of master.
-      if [ "${last_committed_tag_ver}" != "${last_released_tag}" ]; then
-        git fetch
-        git checkout "${last_committed_tag}"
-      fi
-      snapcraftctl set-version "$(git describe --tags | sed 's/v//')"
-      override-build: |
-      export GOPATH=$PWD
-      cd src/github.com/apple/foundationdb
-      env CGO_ENABLED=0 GOOS=linux \
-      go build --ldflags "-s -w \
-        -X 'github.com/apple/foundationdb/version.GitCommit=$(git rev-list -1 HEAD)' \
-        -X 'github.com/apple/foundationdb/version.Version=$(git describe --tags --abbrev=0)'" \
-        -a -installsuffix cgo -o $SNAPCRAFT_PART_INSTALL/bin/foundationdb
-    build-snaps:
-      - 
-    build-packages:
-      - git
-      - sed
-      - g++
-      - make
-      - libsdl1.2-dev
-      - libpng-dev
-      - libsdl-net1.2-dev
-      - libsdl-sound1.2-dev
-      - libasound2-dev
+  foundationdb:
+    after: [desktop-glib-only]
+    plugin: dump
+    source:
+      - on amd64: https://www.foundationdb.org/downloads/$SNAPCRAFT_PROJECT_VERSION/FoundationDB_v$SNAPCRAFT_PROJECT_VERSION-stable_x11.64.tar.gz
+      
     stage-packages:
-      - libsdl-sound1.2
-      - libsdl-net1.2
+      - libgl1-mesa-dri
+      - libglu1-mesa
+      - libgl1-mesa-glx
+      - libgles2-mesa
+      - libflac8
       - libxcursor1
       - libxi6
       - libxinerama1
       - libxrandr2
       - libxrender1
-      - libopenal1
-      - libsndio6.1
-      - libspeex1
-      - libvorbisfile3
-      - libwayland-client0
-      - libwayland-cursor0
-      - libwayland-egl1-mesa
-      - libxkbcommon0
-      - libglu1-mesa
       - libasound2
       - libasyncns0
-      - libbsd0
-      - libcaca0
-      - libdbus-1-3
-      - libflac8
-      - libgcc1
-      - libgcrypt20
-      - libgl1
-      - libglvnd0
-      - libglx0
-      - libgpg-error0
-      - liblz4-1
-      - liblzma5
-      - libncursesw5
       - libogg0
-      - libpng16-16
       - libpulse0
-      - libsdl1.2debian
-      - libslang2
       - libsndfile1
-      - libstdc++6
-      - libsystemd0
-      - libtinfo5
+      - libtheora0
       - libvorbis0a
       - libvorbisenc2
-      - libwrap0
-      - libx11-6
-      - libxau6
-      - libxcb1
-      - libxdmcp6
-      - libxext6
-      - zlib1g
+      - libvorbisfile3
+      - libwebp5
+    organize:
+      'FoundationDB_v*-stable_x11.*': 'bin/FoundationDB'
