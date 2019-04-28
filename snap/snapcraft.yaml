@@ -1,5 +1,4 @@
 name: foundationdb
-base: core18
 version: 6.0.18
 summary:  An open source, distributed, transactional key-value store.
 description:| 
@@ -7,6 +6,7 @@ A multi-model NoSQL database.
 
 grade: stable
 confinement: classic
+base: core18
 
 architectures:
   - build-on: amd64
