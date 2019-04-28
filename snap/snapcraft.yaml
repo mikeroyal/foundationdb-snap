@@ -21,6 +21,7 @@ parts:
   foundationdb:
     after: [desktop-glib-only]
     plugin: dump
+    source-type: tar
     source:
       - on amd64: https://www.foundationdb.org/downloads/$SNAPCRAFT_PROJECT_VERSION/FoundationDB_v$SNAPCRAFT_PROJECT_VERSION.tar.gz
       
