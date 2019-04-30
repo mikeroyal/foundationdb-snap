@@ -12,15 +12,16 @@ base: core18
 architectures:
   - build-on: amd64
   
-apps:
-  foundationdb:
-    command: foundationdb 
-
 parts:
   foundationdb:
     plugin: dump
     source-type: tar
-    source:
-      - on amd64: https://www.foundationdb.org/downloads/$SNAPCRAFT_PROJECT_VERSION/linux/fdb_$SNAPCRAFT_PROJECT_VERSION.tar.gz
+    source: https://www.foundationdb.org/downloads/$SNAPCRAFT_PROJECT_VERSION/linux/fdb_$SNAPCRAFT_PROJECT_VERSION.tar.gz
+    
+apps:
+  foundationdb:
+    command: foundationdb 
+
+
       
 
