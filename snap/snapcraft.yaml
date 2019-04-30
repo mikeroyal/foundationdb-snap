@@ -4,6 +4,8 @@ summary: A multi-model NoSQL database.
 description:| 
 An open source, distributed, transactional key-value store.
 
+adopt-info: foundationdb
+grade: devel
 confinement: devmode
 base: core18
 
