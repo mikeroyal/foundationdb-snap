@@ -5,7 +5,7 @@ description:|
 An open source, distributed, transactional key-value store.
 
 adopt-info: foundationdb
-grade: devel
+
 confinement: devmode
 base: core18
 
@@ -21,6 +21,6 @@ parts:
     plugin: dump
     source-type: tar
     source:
-      - on amd64: https://www.foundationdb.org/downloads/$SNAPCRAFT_PROJECT_VERSION/FoundationDB_v$SNAPCRAFT_PROJECT_VERSION.tar.gz
+      - on amd64: https://www.foundationdb.org/downloads/$SNAPCRAFT_PROJECT_VERSION/linux/fdb_$SNAPCRAFT_PROJECT_VERSION.tar.gz
       
 
